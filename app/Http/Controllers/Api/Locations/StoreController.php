@@ -3,25 +3,14 @@
 namespace App\Http\Controllers\Api\Locations;
 
 use App\Http\Requests\Locations\StoreRequest;
+use App\Http\Resources\LocationResource;
 
 class StoreController extends LocationsController
 {
-    public function __invoke(StoreRequest $request): void
+    public function __invoke(StoreRequest $request): LocationResource
     {
-        dd($request);
         $data = $request->validated();
-//        $page = $data['page'] ?? 1;
-//        $perPage = $data['per_page'] ?? null;
-//        $filter = app()->make(FlowerFilter::class, ['queryParams' => array_filter($data)]);
-//        $flowers = Flower::filter($filter)->orderBy('id', 'ASC');
-//        if ($perPage != null){
-//            $flowers = $flowers->paginate( $perPage,
-//                ['*'],
-//                'page',
-//                $page
-//            );
-//        }
-//        else $flowers = $flowers->orderBy('id', 'ASC')->get();
-//        return FlowerResource::collection($flowers);
+        $location = $this->service->store($data);
+        return new LocationResource($location);
     }
 }

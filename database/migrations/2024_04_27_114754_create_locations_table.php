@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title', 255)->nullable(false);
             $table->string('description', 512)->nullable(false)->default("");
             $table->string('address', 255)->nullable(false);
-            $table->string('dateUrl', 255)->nullable(false);
+            $table->string('dataUrl', 255)->nullable(false);
             $table->boolean('isVisible')->nullable(false)->default(true);
             $table->string('hashSum', 255)->nullable(false);
             $table->string('path', 255)->nullable(false);
