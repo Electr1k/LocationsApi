@@ -9,6 +9,6 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'locations'], function ($router){
     Route::get('/all', IndexController::class);
-    Route::post('/b', StoreController::class);
+    Route::post('/', StoreController::class);
 
 });
