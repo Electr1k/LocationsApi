@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Locations\DestroyController;
 use App\Http\Controllers\Api\Locations\IndexController;
 use App\Http\Controllers\Api\Locations\StoreController;
 use Illuminate\Support\Facades\Route;
@@ -10,5 +11,6 @@ Route::group([
     'prefix' => 'locations'], function ($router){
     Route::get('/all', IndexController::class);
     Route::post('/', StoreController::class);
+    Route::delete('/{location}', DestroyController::class);
 
 });
