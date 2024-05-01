@@ -19,4 +19,21 @@ services:
             dockerfile: _docker/app/Dockerfile
         volumes:
             - ./:/var/www
+        depends_on:
+            - postgres
         container_name: locations_app
+
+    postgres:
+        image: postgres
+        restart: always
+        volumes:
+            - ./tmp/db:/var/lib/mysql
+        environment:
+        - POSTGRES_USER=$DB_USERNAME
+        - POSTGRES_PASSWORD=$DB_PASSWORD
+        - POSTGRES_DB=$DB_DATABASE
+        ports:
+            - 5434:5432
+        container_name: locations_db
+volumes:
+    tmp:

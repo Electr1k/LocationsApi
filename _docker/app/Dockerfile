@@ -7,12 +7,17 @@ RUN apt-get update && apt-get install -y \
       libzip-dev \
       zip unzip \
       git && \
-      docker-php-ext-install pdo_mysql && \
+      docker-php-ext-install pdo_pgsql && \
       docker-php-ext-install bcmath && \
       docker-php-ext-install gd && \
       docker-php-ext-install zip && \
       apt-get clean && \
       rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN apt-get -y update \
+&& apt-get install -y libicu-dev \
+&& docker-php-ext-configure intl \
+&& docker-php-ext-install intl
 
 COPY --chown=www-data:www-data ./_docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
 
