@@ -34,6 +34,11 @@ class LocationsService
         return Location::orderBy('id', 'ASC')->get();
     }
 
+    public function trashed()
+    {
+        return Location::onlyTrashed()->orderBy('id', 'ASC')->get();
+    }
+
     public function destroy(Location $location): bool|JsonResponse
     {
         if ($location){
