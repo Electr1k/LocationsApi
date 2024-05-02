@@ -13,7 +13,7 @@ services:
             - app
 
     app:
-        user: "www-data"
+        user: www-data
         build:
             context: .
             dockerfile: _docker/app/Dockerfile
