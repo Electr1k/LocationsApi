@@ -3,9 +3,8 @@
 namespace App\Services;
 
 use App\Models\Dot;
+use App\Models\DotType;
 use App\Models\Location;
-use Exception;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -36,8 +35,11 @@ class LocationsService
             $locationDB = Location::create($location);
 
             foreach ($map_json['dots'] as $dot){
-                unset($dot['id'], $dot['photoUrls']);
+                $dot['index_in_location'] = $dot['id'];
+                $type = DotType::firstOrCreate(['title' => $dot['type']]);
+                unset($dot['id'], $dot['photoUrls'], $dot['type']);
                 $dot['location_id'] = $locationDB->id;
+                $dot['type_id'] = $type->id;
                 $dot['connected'] = json_encode($dot['connected']);
                 Dot::create($dot);
             }
